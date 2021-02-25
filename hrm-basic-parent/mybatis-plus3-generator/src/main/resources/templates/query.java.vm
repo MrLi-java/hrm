@@ -1,0 +1,14 @@
+package cn.itsource.cw.query;
+
+
+import lombok.Data;
+import cn.itsource.cw.query.BaseQuery;
+
+/**
+ *
+ * @author ${author}
+ * @since ${date}
+ */
+@Data
+public class ${table.entityName}Query extends BaseQuery{
+}

@@ -1,0 +1,22 @@
+#注册中心 ， 服务的配置 ，zuul的配置(前缀，忽略服务 ，路由)
+eureka:
+  client:
+    registry-fetch-interval-seconds: 5
+    serviceUrl:
+      defaultZone: http://localhost:1010/eureka/
+  instance:
+    prefer-ip-address: true  #使用ip注册到Eureka
+    instance-id: zuul-server:1020  #指定客户端实例的ID
+server:
+  port: 1020
+spring:
+  application:
+    name: zuul-server #服务名
+zuul:
+  prefix: "/hrm" #统一访问的前缀
+  ignored-services: "*" #所有的服务都不要使用服务名的方式去访问
+  routes:
+    system-server: "/system/**" #系统管理服务
+  retryable: true #是否开启重试功能
+  ribbon:
+    eager-load.enabled: true  	# 饥饿加载

@@ -12,6 +12,7 @@
     <modules>
         <module>hrm-basic-util</module>
         <module>hrm-basic-common</module>
+        <module>mybatis-plus3-generator</module>
     </modules>
 
     <artifactId>hrm-basic-parent</artifactId>
