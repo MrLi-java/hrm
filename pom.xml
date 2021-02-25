@@ -11,10 +11,6 @@
         <module>hrm-basic-parent</module>
         <module>hrm-support-parent</module>
         <module>hrm-system-parent</module>
-        <module>hrm-support-parent/hrm-eureka-server-1010</module>
-        <module>hrm-support-parent/hrm-zuul-server-1020</module>
-        <module>hrm-support-parent/hrm-config-server-1030</module>
-
     </modules>
     <packaging>pom</packaging>
 

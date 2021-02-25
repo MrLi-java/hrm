@@ -9,6 +9,11 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <packaging>pom</packaging>
+    <modules>
+        <module>hrm-eureka-server-1010</module>
+        <module>hrm-zuul-server-1020</module>
+        <module>hrm-config-server-1030</module>
+    </modules>
 
     <artifactId>hrm-support-parent</artifactId>
 
