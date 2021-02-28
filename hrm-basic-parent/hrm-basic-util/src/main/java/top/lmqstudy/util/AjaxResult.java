@@ -22,6 +22,12 @@ public class AjaxResult {
         return message;
     }
 
+    public AjaxResult setErrorCode(ErrorCode errorCode){
+        this.message = errorCode.getMessage();
+        this.success = false;
+        return this;
+    }
+
     public AjaxResult setMessage(String message) {
         this.message = message;
         return this;
