@@ -2,7 +2,7 @@ package ${package.Controller};
 
 //这里要先设置idea的自动导包功能。代码生成后，重新打开该文件，让idea自动帮助导包
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import cn.itsource.cw.util.PageList;
+import top.lmqstudy.util.PageList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

@@ -1,8 +1,8 @@
-package cn.itsource.cw.query;
+package top.lmqstudy.query;
 
 
 import lombok.Data;
-import cn.itsource.cw.query.BaseQuery;
+import top.lmqstudy.query.BaseQuery;
 
 /**
  *
