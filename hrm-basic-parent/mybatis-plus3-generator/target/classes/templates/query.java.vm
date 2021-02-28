@@ -1,0 +1,14 @@
+package top.lmqstudy.query;
+
+
+import lombok.Data;
+import top.lmqstudy.query.BaseQuery;
+
+/**
+ *
+ * @author ${author}
+ * @since ${date}
+ */
+@Data
+public class ${table.entityName}Query extends BaseQuery{
+}
