@@ -1,0 +1,45 @@
+server:
+  port: 1060
+spring:
+  application:
+    name: hrm-course
+  datasource:
+    username: root
+    password: lmq981226
+    url: jdbc:mysql:///hrm-course?characterEncoding=utf-8&serverTimezone=GMT%2B8
+    driver-class-name: com.mysql.cj.jdbc.Driver #使用的是8.0的新版mysql驱动
+    type: com.alibaba.druid.pool.DruidDataSource
+    druid: #下面是对Druid连接池进行的一些优化配置
+      initial-size: 15 # 初始化时建立物理连接的个数
+      min-idle: 10 # 最小连接池连接数量，最小空闲数量
+      max-active: 50 # 最大连接池连接数量，最大活跃连接数
+      max-wait: 60000 # 配置获取连接等待超时的时间
+      timeBetweenEvictionRunsMillis: 60000
+      minEvictableIdleTimeMillis: 300000
+      validationQuery: SELECT 1
+      testWhileIdle: true
+      testOnBorrow: true
+      testOnReturn: false
+      poolPreparedStatements: true
+      maxPoolPreparedStatementPerConnectionSize: 20
+      filters: stat,wall
+      connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
+      stat-view-servlet: #这个配置表示登录druid的后台监控界面的配置
+        allow: 0.0.0.0 # 允许哪些IP访问druid监控界面,多个IP以逗号分隔
+        login-username: admin # 设置登录帐号
+        login-password: 123456 # 设置登录密码
+        reset-enable: false # 是否允许重置数据
+      # 在配置mybatis-plus时，一定要注意：   mybatis-plus前面千万不要有空格。因为这是针对mybaits-plus框架独立的配置
+      # 它不在 spring内
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl #配置 mybatis-plus的sql日志打印（添加这个配置，可以让执行的sql语句输出到控制台）
+
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:1010/eureka
+  instance:
+    prefer-ip-address: true
+    instance-id: ${spring.application.name}:${server.port}  #指定客户端实例的ID
