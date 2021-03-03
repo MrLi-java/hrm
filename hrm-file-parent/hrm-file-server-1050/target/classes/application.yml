@@ -1,0 +1,12 @@
+server:
+  port: 1050
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:1010/eureka
+  instance:
+    prefer-ip-address: true
+    instance-id: ${spring.application.name}:${server.port}  #指定客户端实例的ID
+spring:
+  application:
+    name: hrm-file
