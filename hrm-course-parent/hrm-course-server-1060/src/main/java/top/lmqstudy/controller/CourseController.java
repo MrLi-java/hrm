@@ -20,6 +20,31 @@ public class CourseController {
     @Autowired
     public ICourseService courseService;
 
+    //课程上线 onLineCourse
+    @RequestMapping(value="/onLineCourse/{id}",method= RequestMethod.POST)
+    public AjaxResult onLineCourse(@PathVariable("id") Long id){
+        try {
+            courseService.onLineCourse(id);
+            return AjaxResult.me();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return AjaxResult.me().setSuccess(false).setMessage("上线失败！"+e.getMessage());
+        }
+    }
+
+    //课程下线 offLineCourse
+    @RequestMapping(value="/offLineCourse/{id}",method= RequestMethod.POST)
+    public AjaxResult offLineCourse(@PathVariable("id") Long id){
+        try {
+            courseService.offLineCourse(id);
+            return AjaxResult.me();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return AjaxResult.me().setSuccess(false).setMessage("下线失败！"+e.getMessage());
+        }
+    }
+
+
     /**
      * 保存和修改公用的
      * @param course 传递的实体

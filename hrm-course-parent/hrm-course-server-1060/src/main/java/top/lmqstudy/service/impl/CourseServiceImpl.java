@@ -1,9 +1,13 @@
 package top.lmqstudy.service.impl;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
+import top.lmqstudy.controller.SearchFeignClient;
+import top.lmqstudy.doc.CourseDoc;
 import top.lmqstudy.domain.Course;
 import top.lmqstudy.domain.CourseDetail;
+import top.lmqstudy.domain.CourseMarket;
 import top.lmqstudy.dto.CourseDto;
 import top.lmqstudy.mapper.CourseDetailMapper;
 import top.lmqstudy.mapper.CourseMapper;
@@ -27,6 +31,8 @@ public class CourseServiceImpl extends ServiceImpl<CourseMapper, Course> impleme
     private CourseMarketMapper courseMarketMapper;
     @Autowired
     private CourseDetailMapper courseDetailMapper;
+    @Autowired
+    private SearchFeignClient searchFeignClient;
 
 
     @Override
@@ -52,5 +58,39 @@ public class CourseServiceImpl extends ServiceImpl<CourseMapper, Course> impleme
         dto.getCourseDetail().setId(dto.getCourse().getId());
         courseDetailMapper.insert(dto.getCourseDetail());
 
+    }
+
+    @Override
+    public void onLineCourse(Long id) {
+        Course course = baseMapper.selectById(id);
+
+        course.setStatus(Course.STATUS_ONLINE);
+        baseMapper.updateById(course);
+
+        CourseDetail courseDetail = courseDetailMapper.selectById(id);
+        CourseMarket courseMarket = courseMarketMapper.selectById(id);
+
+        CourseDoc courseDoc = new CourseDoc();
+
+        BeanUtils.copyProperties(course,courseDoc);
+        BeanUtils.copyProperties(courseDetail,courseDoc);
+        BeanUtils.copyProperties(courseMarket,courseDoc);
+
+        searchFeignClient.saveCourse(courseDoc);
+
+
+    }
+
+    @Override
+    public void offLineCourse(Long id) {
+        Course course = baseMapper.selectById(id);
+
+        course.setStatus(Course.STATUS_OFFLINE);
+        baseMapper.updateById(course);
+
+        CourseDoc courseDoc = new CourseDoc();
+        BeanUtils.copyProperties(course,courseDoc);
+
+        searchFeignClient.deleteCourse(courseDoc);
     }
 }

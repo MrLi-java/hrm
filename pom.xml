@@ -13,6 +13,7 @@
         <module>hrm-system-parent</module>
         <module>hrm-file-parent</module>
         <module>hrm-course-parent</module>
+        <module>hrm-search-parent</module>
 
     </modules>
     <packaging>pom</packaging>

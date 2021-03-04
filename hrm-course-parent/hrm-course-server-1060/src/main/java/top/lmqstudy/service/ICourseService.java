@@ -15,4 +15,8 @@ import top.lmqstudy.dto.CourseDto;
 public interface ICourseService extends IService<Course> {
 
     void add(CourseDto dto);
+
+    void onLineCourse(Long id);
+
+    void offLineCourse(Long id);
 }
