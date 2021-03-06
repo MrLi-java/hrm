@@ -24,6 +24,11 @@ public class CourseTypeController {
     private RedisService redisService;
 
 
+    @GetMapping("/crumbs/{id}")
+    public AjaxResult crumbs(@PathVariable("id")Long id){
+        return courseTypeService.crumbs(id);
+    }
+
     @GetMapping("/treeData")
     public AjaxResult treeData(){
         return courseTypeService.treeData();

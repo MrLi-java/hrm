@@ -1,0 +1,19 @@
+spring:
+  application:
+    name: hrm-es-server
+  data:
+    elasticsearch:
+      cluster-name: elasticsearch
+      cluster-nodes: 127.0.0.1:9300 #9200是图形界面端,9300代码端
+
+server:
+  port: 1080
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:1010/eureka
+  instance:
+    prefer-ip-address: true
+    instance-id: ${spring.application.name}:${server.port}  #指定客户端实例的ID
+

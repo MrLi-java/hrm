@@ -1,12 +1,11 @@
 package top.lmqstudy.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import top.lmqstudy.doc.CourseDoc;
+import top.lmqstudy.query.CourseQuery;
 import top.lmqstudy.repository.CourseDocRepository;
+import top.lmqstudy.service.SearchService;
 import top.lmqstudy.util.AjaxResult;
 
 //ES接口
@@ -15,6 +14,9 @@ public class ESController {
 
     @Autowired
     private CourseDocRepository courseDocRepository;
+
+    @Autowired
+    private SearchService searchService;
 
     //添加
     @RequestMapping(value = "/es/save",method = RequestMethod.POST)
@@ -29,5 +31,10 @@ public class ESController {
         //courseDocRepository.delete(courseDoc);
         courseDocRepository.deleteById(courseDoc.getId());
         return AjaxResult.me();
+    }
+
+    @PostMapping("/es/searchCourse")
+    public AjaxResult searchCourse(@RequestBody CourseQuery courseQuery){
+        return searchService.searchCourse(courseQuery);
     }
 }

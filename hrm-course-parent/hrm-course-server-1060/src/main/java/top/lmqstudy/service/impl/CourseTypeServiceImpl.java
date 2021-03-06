@@ -11,6 +11,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
 import top.lmqstudy.service.RedisService;
 import top.lmqstudy.util.AjaxResult;
+import top.lmqstudy.vo.CrumbsVo;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,6 +43,23 @@ public class CourseTypeServiceImpl extends ServiceImpl<CourseTypeMapper, CourseT
         }
 
         return AjaxResult.me().setResultObj(parent);
+    }
+
+    @Override
+    public AjaxResult crumbs(Long id) {
+        CourseType courseType = baseMapper.selectById(id);
+        String path = courseType.getPath();
+        String[] pId = path.split("\\.");
+        List<CrumbsVo> pList = new ArrayList<>();
+        for (String s : pId) {
+            CrumbsVo crumbsVo = new CrumbsVo();
+            CourseType courseType1 = baseMapper.selectById(Integer.valueOf(s));
+            List<CourseType> byPid = baseMapper.findByPid(courseType1.getPid());
+            crumbsVo.setCourseType(courseType1);
+            crumbsVo.setBrotherCourseTypes(byPid);
+            pList.add(crumbsVo);
+        }
+        return AjaxResult.me().setResultObj(pList);
     }
 
     public void getChildList(List<CourseType> parent){

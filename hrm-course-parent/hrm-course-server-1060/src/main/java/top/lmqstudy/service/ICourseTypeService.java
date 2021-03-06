@@ -15,4 +15,6 @@ import top.lmqstudy.util.AjaxResult;
 public interface ICourseTypeService extends IService<CourseType> {
 
     AjaxResult treeData();
+
+    AjaxResult crumbs(Long id);
 }

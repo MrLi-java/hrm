@@ -24,7 +24,7 @@ public class CourseDoc {
     /**
      * 课程名称
      */
-    @Field(type = FieldType.Keyword)
+    @Field(type = FieldType.Text, analyzer = "ik_max_word", searchAnalyzer = "ik_max_word")
     private String name;
     /**
      * 适用人群
